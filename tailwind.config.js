@@ -2,7 +2,12 @@
 export default {
   content: [],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Nunito', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['"Baloo 2"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      },
+    },
   },
   plugins: [
        require('@tailwindcss/typography')

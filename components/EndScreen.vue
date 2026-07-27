@@ -11,6 +11,10 @@ defineProps({
     button: {
         type: Boolean,
         default: true
+    },
+    accent: {
+        type: String,
+        default: '#a3e635'
     }
 })
 
@@ -23,7 +27,7 @@ function playAgain() {
 </script>
 
 <template>
-  <ButtonScreen @button-press="playAgain" :button="button" :title="title" :button-text="buttonText">
+  <ButtonScreen @button-press="playAgain" :button="button" :title="title" :button-text="buttonText" :accent="accent">
       <slot></slot>
   </ButtonScreen>
 </template>
