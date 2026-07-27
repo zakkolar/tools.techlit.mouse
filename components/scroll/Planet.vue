@@ -25,8 +25,9 @@ const props = defineProps({
 
 </script>
 <template>
-  <div class="container" :class="{animated: animate}">
-    <div class="planet" :style="style">
+  <div class="planet-wrapper" :class="{animated: animate}">
+    <div class="halo"></div>
+    <div class="planet">
       <div class="circle circle-one"></div>
       <div class="circle circle-two"></div>
       <div class="circle circle-three"></div>
@@ -37,9 +38,28 @@ const props = defineProps({
 </template>
 <style scoped>
 
-.container {
+.planet-wrapper {
   pointer-events: none;
 
+}
+
+.halo {
+  --primary-color: v-bind('color');
+  --size: v-bind('height');
+
+  font-size: calc(var(--size) / 2.5);
+
+  position: absolute;
+  inset: -0.6em;
+  border-radius: 50%;
+  background: var(--primary-color);
+  opacity: 0.2;
+  pointer-events: none;
+  filter: blur(0.35em);
+}
+
+.animated .halo {
+  animation: pulse 3s ease-in-out infinite;
 }
 
 .planet {
@@ -56,15 +76,10 @@ const props = defineProps({
   width: 2.5em;
   border-radius: 50%;
   position: relative;
+  z-index: 0;
   overflow: hidden;
 
-  box-shadow: 0 0 0.5em var(--primary-color);
-
   pointer-events: auto;
-}
-
-.animated .planet {
-  animation: pulse 3s ease-in-out infinite;
 }
 
 
@@ -135,15 +150,13 @@ const props = defineProps({
 }
 
 @keyframes pulse {
-  0% {
-    box-shadow: 0 0 0.09em var(--primary-color);
+  0%, 100% {
+    opacity: 0.14;
+    transform: scale(0.94);
   }
   50% {
-    box-shadow: 0 0 0.5em var(--primary-color);
-    transform: scale(1.03);
-  }
-  100% {
-    box-shadow: 0 0 0.09em var(--primary-color);
+    opacity: 0.3;
+    transform: scale(1.06);
   }
 }
 

@@ -20,10 +20,12 @@ const props = defineProps({
 </script>
 <template>
   <div class="container" :class="{animated: animate}">
+    <div class="flame-glow"></div>
     <div class="wing left"></div>
     <div class="wing right"></div>
     <div class="rocket">
       <div class="main">
+        <div class="window-glow"></div>
         <div class="window"></div>
       </div>
     </div>
@@ -131,6 +133,24 @@ const props = defineProps({
   left: -0.09em;
 }
 
+.window-glow {
+  position: absolute;
+  left: 50%;
+  top: 0.545em;
+  width: 0.38em;
+  height: 0.38em;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: var(--window-color);
+  opacity: 0.25;
+  filter: blur(0.07em);
+  pointer-events: none;
+}
+
+.animated .window-glow {
+  animation: windowGlowPulse 2s infinite alternate;
+}
+
 .window {
   position: absolute;
   left: 50%;
@@ -154,6 +174,24 @@ const props = defineProps({
   background: rgba(255, 255, 255, 0.5);
   top: 0.1em;
   left: 0.05em;
+}
+
+.flame-glow {
+  position: absolute;
+  top: 1.65em;
+  left: 50%;
+  width: 0.5em;
+  height: 0.7em;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: var(--flame-outer-color);
+  opacity: 0.3;
+  filter: blur(0.12em);
+  pointer-events: none;
+}
+
+.animated .flame-glow {
+  animation: flameGlowPulse 0.2s linear infinite alternate;
 }
 
 .flame-outer {
@@ -252,13 +290,24 @@ const props = defineProps({
   }
 }
 
+@keyframes flameGlowPulse {
+  0% {
+    opacity: 0.24;
+    transform: translateX(-50%) scale(0.92);
+  }
+  100% {
+    opacity: 0.4;
+    transform: translateX(-50%) scale(1.1);
+  }
+}
+
 /* Window glow animation */
-@keyframes windowGlow {
+@keyframes windowGlowPulse {
   0%, 100% {
-    box-shadow: 0 0 5px rgba(7, 106, 161, 0.3);
+    opacity: 0.18;
   }
   50% {
-    box-shadow: 0 0 10px rgba(7, 106, 161, 0.7);
+    opacity: 0.4;
   }
 }
 
@@ -280,10 +329,6 @@ const props = defineProps({
 
   .flame-inner {
     animation: flameInnerPulse 0.1s ease-in-out infinite alternate;
-  }
-
-  .window {
-    animation: windowGlow 2s infinite alternate;
   }
 
 }

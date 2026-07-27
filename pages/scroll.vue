@@ -163,7 +163,7 @@ const ITEMS = {
     component: markRaw(Rocket),
     section: 'space',
     name: 'rocket',
-    previewHeight: 10
+    previewHeight: 8
   },
   CLOUD: {
     component: markRaw(Cloud),
@@ -183,19 +183,20 @@ const ITEMS = {
   TREE: {
     component: markRaw(Tree),
     section: 'ground',
-    name: 'tree'
+    name: 'tree',
+    previewHeight: 6
   },
   BONE: {
     component: markRaw(Bone),
     section: 'dirt',
     name: 'bone',
-    previewHeight: 2
+    previewHeight: 1
   },
   WORM: {
     component: markRaw(Worm),
     section: 'dirt',
     name: 'bone',
-    previewHeight: 4
+    previewHeight: 2
   },
   TREASURE: {
     component: markRaw(Treasure),
@@ -243,18 +244,18 @@ function playSound(s: string) {
       <Star v-for="star of numStars" class="absolute cursor-pointer" :animate="true" height="5vh"
             @click="handleClick(ITEMS.STAR)" :randomize="true"></Star>
 
+      <PlanetOrange @click="handleClick(ITEMS.PLANET_ORANGE)" class="absolute cursor-pointer"
+                    style="top: 30vh; left: 10%;" height="15vh" :animate="true"></PlanetOrange>
 
       <PlanetOrange @click="handleClick(ITEMS.PLANET_ORANGE)" class="absolute cursor-pointer"
-                    style="top: 20vh; left: 10%;" height="15vh" :animate="true"></PlanetOrange>
-
-      <PlanetOrange @click="handleClick(ITEMS.PLANET_ORANGE)" class="absolute cursor-pointer"
-                    style="top: 7vh; left: 80%;"
+                    style="top: 17vh; left: 80%;"
                     height="12vh" :animate="true"></PlanetOrange>
 
-      <PlanetBlue @click="handleClick(ITEMS.PLANET_BLUE)" class="absolute cursor-pointer" style="top: 4vh; left: 42%;"
+      <PlanetBlue @click="handleClick(ITEMS.PLANET_BLUE)" class="absolute cursor-pointer" style="top: 14vh; left: 42%;"
                   height="9vh" :animate="true"></PlanetBlue>
 
-      <Rocket height="20vh" @click="handleClick(ITEMS.ROCKET)" class="cursor-pointer absolute" :animate="true"></Rocket>
+      <Rocket height="20vh" @click="handleClick(ITEMS.ROCKET)" class="cursor-pointer absolute" :animate="true"
+              style="top: 10vh;"></Rocket>
 
 
     </div>
@@ -323,40 +324,31 @@ function playSound(s: string) {
     </div>
   </div>
 
-  <div id="prompt" class="text-white justify-between flex px-8">
-    <div class="my-auto flex">
-      <p class="inline-block my-auto text-[6vh]">
-        <span v-if="currentItem">Can you find this?</span>
-        <span v-else>Can you find...</span>
-      </p>
-      <div v-if="currentItem && gameState === GAME_STATES.PLAYING" class="ml-5 my-auto inline-block">
-        <component :is="currentItem.component" class="relative"
-                   :height="`${currentItem.previewHeight || 8}vh`"></component>
-      </div>
-    </div>
-    <div class="text-right text-[3vh] ml-auto my-auto">
-      <p>Found items: {{ foundItems }}</p>
-      <p>Time remaining: {{ minutes }}:{{ seconds }}</p>
+  <GameHud :minutes="minutes" :seconds="seconds" label="Found" :count="foundItems" accent="#28c2d1" />
+  <div id="notch">
+    <p class="inline-block my-auto font-display font-medium">
+      <span v-if="currentItem">Can you find this?</span>
+      <span v-else>Can you find...</span>
+    </p>
+    <div v-if="currentItem && gameState === GAME_STATES.PLAYING" class="ml-5 mr-2 my-auto inline-block">
+      <component :is="currentItem.component" class="relative"
+                 :height="`${currentItem.previewHeight || 5}vh`"></component>
     </div>
   </div>
   <div v-if="[GAME_STATES.READY, GAME_STATES.GAME_OVER].includes(gameState)"
        class="absolute top-0 left-0 right-0 bottom-0 bg-[#00000040]">
 
   </div>
-  <StartScreen title="Scavenger hunt" @start="startGame" v-if="gameState === GAME_STATES.READY">
+  <StartScreen title="Scavenger Hunt" @start="startGame" v-if="gameState === GAME_STATES.READY" accent="#28c2d1">
     Scroll up and down to find each item.
   </StartScreen>
 
 
-  <EndScreen v-if="gameState === GAME_STATES.GAME_OVER" @play-again="startGame" :button="showPlayAgain">
+  <EndScreen v-if="gameState === GAME_STATES.GAME_OVER" @play-again="startGame" :button="showPlayAgain" accent="#28c2d1">
     You found {{ foundItems }} item<span v-if="foundItems !== 1">s</span>!
   </EndScreen>
 </template>
 <style>
-
-:root {
-  --prompt-height: 20vh;
-}
 
 body {
 
@@ -373,19 +365,18 @@ body {
 
   --space: rgba(19, 14, 68, 1);
 
-  ---sky: rgba(69, 238, 255, 1);
+  --sky: rgba(69, 238, 255, 1);
 }
 
 #space {
-  background: rgb(69, 238, 255);
-  background: linear-gradient(0deg, var(---sky) 0%, rgba(35, 86, 128, 1) 25%, rgba(21, 22, 75, 1) 50%, var(--space) 60%, var(--space) 100%);
-  height: 100vh;
+  background: linear-gradient(0deg, var(--sky) 0%, rgba(35, 86, 128, 1) 25%, rgba(21, 22, 75, 1) 50%, var(--space) 60%, var(--space) 100%);
+  height: 110vh;
 }
 
 
 #sky {
   @apply section;
-  background-color: var(---sky);
+  background-color: var(--sky);
   height: 90vh;
 
 }
@@ -402,21 +393,29 @@ body {
   height: 75vh;
 }
 
-#prompt {
-  background: #2c2626;
-  width: 100%;
-  height: var(--prompt-height);
+#notch {
+  background: #22212b;
+  color: white;
   position: fixed;
   top: 0;
-  @apply border-b-[0.5vh] border-dashed shadow-2xl;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  max-width: 100vw;
+  font-size: clamp(1.5rem, 3.2vw, 2.75rem);
+  padding: 0.3em 1em 0.5em;
+  border-radius: 0 0 1.6vh 1.6vh;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
 }
 
 #environment {
   width: 100%;
-  height: calc(100vh - var(--prompt-height));
+  height: 100vh;
   position: fixed;
   overflow: auto;
-  bottom: 0;
+  top: 0;
 }
 
 

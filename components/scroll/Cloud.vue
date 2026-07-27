@@ -47,6 +47,7 @@ const style = computed(() => {
     height: 3em;
     background: #fff;
     border-radius: 50% 50% 0 0;
+    filter: drop-shadow(0 calc(var(--height) / 12) calc(var(--height) / 6) rgba(0, 0, 0, 0.1));
 }
 
 .cloud.absolute {

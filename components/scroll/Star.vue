@@ -63,6 +63,7 @@ const style = computed(() => {
     --star-color: white;
   --star-offset: -0.5em;
   transform: translateY(var(--star-offset));
+  transform-origin: 1.075em 1.15em;
 }
 
 .star:before {

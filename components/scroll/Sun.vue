@@ -7,18 +7,45 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="sun" :style="`--height: ${height}`"></div>
+  <div class="sun" :style="`--height: ${height}`">
+    <div class="halo halo-outer"></div>
+    <div class="halo halo-inner"></div>
+    <div class="core"></div>
+  </div>
 </template>
 
 <style scoped>
     .sun {
-
         --sun-color: #ffd841;
 
-        background: var(--sun-color);
         width: var(--height);
         height: var(--height);
-        border-radius: var(--height);
-        box-shadow: 0 0 calc(var(--height) * 0.75) 0 var(--sun-color);
+        pointer-events: none;
+    }
+
+    .halo {
+        position: absolute;
+        border-radius: 50%;
+        background: var(--sun-color);
+        pointer-events: none;
+        filter: blur(calc(var(--height) * 0.12));
+    }
+
+    .halo-outer {
+        inset: -45%;
+        opacity: 0.16;
+    }
+
+    .halo-inner {
+        inset: -20%;
+        opacity: 0.3;
+    }
+
+    .core {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: var(--sun-color);
+        pointer-events: auto;
     }
 </style>

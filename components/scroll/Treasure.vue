@@ -23,6 +23,7 @@ const props = defineProps({
 <template>
   <div class="wrapper" :class="{animated: animate}">
     <div class="treasure">
+      <div class="halo"></div>
       <div class="chest">
         <div class="lid">
           <div class="bar">
@@ -46,15 +47,10 @@ const props = defineProps({
 
 
 .wrapper {
-  --yellow: yellow;
   --brown: saddlebrown;
   --gold: gold;
-  --blue: torquoise;
-  --blue-light: lightblue;
-  --blue-dark: darkblue;
   --orange: #ffbb1b;
   --orange-dark: #bf7c08;
-  --gray: #eee;
   --border-radius: 0.2em;
   --wood-panels: linear-gradient(180deg, #8b4513 42.37%, #6b340a 42.37%, #6b340a 50%, #8b4513 50%, #8b4513 92.37%, #6b340a 92.37%, #6b340a 100%);
 
@@ -64,7 +60,23 @@ const props = defineProps({
   --height: v-bind('height');
   font-size: calc(var(--height) / 3.5);
   width: 5em;
+  position: relative;
+  z-index: 0;
 
+}
+
+.halo {
+  position: absolute;
+  inset: -0.4em -0.3em;
+  border-radius: 0.4em;
+  background: var(--gold);
+  opacity: 0.12;
+  pointer-events: none;
+  filter: blur(0.4em);
+}
+
+.wrapper.animated .halo {
+  animation: treasure-glow 3s infinite ease-in-out;
 }
 
 .chest {
@@ -233,21 +245,12 @@ const props = defineProps({
 }
 
 @keyframes treasure-glow {
-  0% {
-    box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.1);
+  0%, 100% {
+    opacity: 0.12;
   }
   50% {
-    box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.2);
+    opacity: 0.28;
   }
-  100% {
-    box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.1);
-  }
-}
-
-
-/* Apply animations only when the wrapper has the animated class */
-.wrapper.animated .treasure {
-  animation: treasure-glow 3s infinite ease-in-out;
 }
 
 

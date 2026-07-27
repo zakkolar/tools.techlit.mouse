@@ -29,6 +29,7 @@ const props = defineProps({
 
   z-index: 100;
   pointer-events: none;
+  filter: drop-shadow(0 calc(var(--height) / 12) calc(var(--height) / 6) rgba(0, 0, 0, 0.1));
 
 
 }

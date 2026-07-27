@@ -51,6 +51,7 @@ const animationDelay = `${Math.random() * animationBase}s`;
   width: 3.5em;
   height: 0.8em;
   display: flex;
+  filter: drop-shadow(0 calc(var(--height) / 12) calc(var(--height) / 6) rgba(0, 0, 0, 0.1));
 }
 
 .worm-segment {
