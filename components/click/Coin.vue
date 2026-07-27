@@ -37,6 +37,9 @@ const props = defineProps({
     }
 });
 
+const EDGE_SEGMENTS = 24;
+const edgeAngles = Array.from({length: EDGE_SEGMENTS}, (_, i) => i * (360 / EDGE_SEGMENTS));
+
 const x = ref(-1), y = ref(-1);
 
 function moveCoin() {
@@ -69,6 +72,8 @@ watch([() => props.yMin, () => props.yMax, () => props.xMin, () => props.xMax], 
   <div v-if="x > -1 && y > -1" @click="caught" class="coin" :style="{top:`${y}px`, left: `${x}px`, '--coin-size':`${props.size}px`}">
     <div class="tails"></div>
     <div class="heads"></div>
+    <div v-for="(angle, i) in edgeAngles" :key="i" class="edge-segment" :class="{'edge-segment--dark': i % 2 === 0}"
+         :style="{transform: `rotateZ(${angle}deg) translateX(calc(var(--coin-size) / 2)) rotateY(90deg)`}"></div>
   </div>
 </template>
 
@@ -77,12 +82,14 @@ watch([() => props.yMin, () => props.yMax, () => props.xMin, () => props.xMax], 
   --coin-size: 50px;
 }
 .coin{
-	background: #FFDE00;
+	--coin-face: #ffd54a;
+	--coin-edge: #c97f00;
+	--coin-thickness: calc(var(--coin-size) * 0.14);
 	width: var(--coin-size);
 	height: var(--coin-size);
-	border-radius: 50%;
 	position: absolute;
     -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
 	animation: spin 2.46s linear infinite;
   cursor: pointer;
 
@@ -94,49 +101,43 @@ watch([() => props.yMin, () => props.yMax, () => props.xMin, () => props.xMax], 
 			transform: rotateY(360deg);
 		}
 	}
+}
 
-	&:before{
-		background-color: #FF9900;
-		position: absolute;
-		border-radius: 50%;
-		content: '';
-		height: var(--coin-size);
-		width: var(--coin-size);
-		transform: translateZ(calc(var(--coin-size) * -0.075));
-	}
-
-	&:after{
-		background-color: #FF9900;
-		content: '';
-		left: calc(0.425 * var(--coin-size));
-		position: absolute;
-		height: var(--coin-size);
-		width: calc(0.075 * var(--coin-size));
-		z-index: -10;
-		transform: rotateY(-90deg);
-		transform-origin: 100% 50%;
-	}
+.tails,
+.heads{
+	background: radial-gradient(circle at 35% 30%, #fff6d8 0%, var(--coin-face) 45%, var(--coin-edge) 100%);
+	position: absolute;
+	border-radius: 50%;
+	content: '';
+	height: var(--coin-size);
+	width: var(--coin-size);
+	border: 1px solid var(--coin-edge);
+	box-shadow:
+		0 6px 10px rgba(0, 0, 0, 0.35),
+		0 0 calc(var(--coin-size) * 0.3) rgba(255, 200, 0, 0.55),
+		inset 0 0 0 calc(var(--coin-size) * 0.07) rgba(0, 0, 0, 0.12);
 }
 
 .tails{
-	background-color: #FF9900;
-	position: absolute;
-	border-radius: 50%;
-	content: '';
-	height: var(--coin-size);
-	width: var(--coin-size);
-	transform: translateZ(calc(-0.0005 * var(--coin-size)));
-	border: 1px solid #FF9900;
+	transform: translateZ(calc(var(--coin-thickness) / 2));
 }
 
 .heads{
-	background-color: #FFDE00;
+	transform: translateZ(calc(var(--coin-thickness) / -2));
+}
+
+.edge-segment{
 	position: absolute;
-	border-radius: 50%;
-	content: '';
-	height: var(--coin-size);
-	width: var(--coin-size);
-	transform: translateZ(calc(-0.0755 * var(--coin-size)));
-	border: 1px solid #FF9900;
+	top: 50%;
+	left: 50%;
+	width: var(--coin-thickness);
+	height: calc(var(--coin-size) * 0.145);
+	margin-left: calc(var(--coin-thickness) / -2);
+	margin-top: calc(var(--coin-size) * -0.0725);
+	background: var(--coin-edge);
+}
+
+.edge-segment--dark{
+	background: color-mix(in srgb, var(--coin-edge) 78%, black);
 }
 </style>

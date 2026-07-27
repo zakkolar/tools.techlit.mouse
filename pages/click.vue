@@ -155,20 +155,20 @@ function updateTimer() {
 
 </script>
 <template>
-  <div v-if="gameState !== GAME_STATES.GAME_OVER">
-    <div class="absolute left-2 top-2 text-5xl">{{ minutes }}:{{ seconds }}</div>
-    <div id="coinCount" class="absolute right-2 top-2 text-5xl">Coins: {{ collectedCoins }}</div>
-  </div>
+  <GameHud v-if="gameState !== GAME_STATES.GAME_OVER" :minutes="minutes" :seconds="seconds" label="Coins"
+           :count="collectedCoins" accent="#FFC800" counter-id="coinCount" />
 
-  <StartScreen @start="startGame" v-if="gameState === GAME_STATES.READY" title="Coin Collector">
+  <StartScreen @start="startGame" v-if="gameState === GAME_STATES.READY" title="Coin Collector" accent="#FFC800">
     Click on as many coins as you can before the time runs out.
   </StartScreen>
 
-  <EndScreen v-if="gameState === GAME_STATES.GAME_OVER" @play-again="startGame" :button="showPlayAgain">
+  <EndScreen v-if="gameState === GAME_STATES.GAME_OVER" @play-again="startGame" :button="showPlayAgain" accent="#FFC800">
     You collected {{ collectedCoins }} coin<span v-if="collectedCoins !== 1">s</span>!
   </EndScreen>
 
   <div class="game" v-if="gameState !== GAME_STATES.LOADING">
+    <div class="beam beam--a"></div>
+    <div class="beam beam--b"></div>
     <Coin v-if="gameState === GAME_STATES.PLAYING" v-for="coin of numCoins" :x-min="xMin" :x-max="xMax" :y-min="yMin"
           :y-max="yMax" :size="coinSize"
           @caught="collectCoin">
@@ -181,8 +181,29 @@ function updateTimer() {
 .game {
   width: 100%;
   height: 100vh;
-  background: deepskyblue;
-  border-bottom: 4px;
+  overflow: hidden;
+  position: relative;
+  background:
+    radial-gradient(55% 45% at 50% 42%, rgba(255, 200, 0, 0.16) 0%, rgba(255, 200, 0, 0) 70%),
+    radial-gradient(120% 90% at 50% 100%, #1e2a44 0%, #101a2e 55%, #05070d 100%);
+}
 
+.beam {
+  position: absolute;
+  top: -20%;
+  width: 16vw;
+  height: 150%;
+  background: linear-gradient(180deg, rgba(255, 234, 180, 0.12), rgba(255, 234, 180, 0));
+  filter: blur(3px);
+}
+
+.beam--a {
+  left: 10%;
+  transform: rotate(12deg);
+}
+
+.beam--b {
+  right: 18%;
+  transform: rotate(-10deg);
 }
 </style>
