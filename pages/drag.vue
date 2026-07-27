@@ -113,11 +113,11 @@ function handleAppleDrop(id) {
 }
 
 function randomX() {
-  return randBetween(4, 75);
+  return randBetween(18, 56);
 }
 
 function randomY() {
-  return randBetween(10, 45)
+  return randBetween(15, 58)
 }
 
 function randBetween(min, max) {
@@ -126,8 +126,8 @@ function randBetween(min, max) {
 
 function randomColor() {
   const colors = [
-    '#f54b40',
-    '#f0ff68'
+    '#e6432e',
+    '#c3d92e'
   ]
   return colors[Math.floor(Math.random() * colors.length)];
 }
@@ -206,13 +206,10 @@ function handleDragEnd() {
 
 </script>
 <template>
-  <div v-if="gameState !== GAME_STATES.GAME_OVER" style="font-size: 7vh">
-    <div class="absolute left-2 top-2">{{ minutes }}:{{ seconds }}</div>
-    <div id="coinCount" class="absolute right-2 top-2">Apples: {{ collectedApples }}</div>
-  </div>
+  <GameHud v-if="gameState !== GAME_STATES.GAME_OVER" :minutes="minutes" :seconds="seconds" label="Apples"
+           :count="collectedApples" accent="#5d922f" counter-id="coinCount" />
 
   <div class="game">
-    <div class="grass"></div>
     <div id="tree"></div>
     <DraggableApple v-if="gameState === GAME_STATES.PLAYING"
                     v-for="apple in appleStarts" ref="appleRefs"
@@ -234,11 +231,11 @@ function handleDragEnd() {
     </Basket>
   </div>
 
-  <StartScreen @start="startGame" v-if="gameState === GAME_STATES.READY" title="Apple Picker">
+  <StartScreen @start="startGame" v-if="gameState === GAME_STATES.READY" title="Apple Picker" accent="#5d922f">
     Click and drag as many apples to the basket as you can before time runs out.
   </StartScreen>
 
-  <EndScreen v-if="gameState === GAME_STATES.GAME_OVER" @play-again="startGame" :button="showPlayAgain">
+  <EndScreen v-if="gameState === GAME_STATES.GAME_OVER" @play-again="startGame" :button="showPlayAgain" accent="#5d922f">
     You picked {{ collectedApples }} apple<span v-if="collectedApples !== 1">s</span>!
   </EndScreen>
 </template>
@@ -250,23 +247,17 @@ body {
 .game {
   width: 100%;
   height: 100vh;
-  background: deepskyblue;
-  border-bottom: 4px;
+  background-image: url('/images/forest-bg.svg');
+  background-size: cover;
+  background-position: bottom center;
+  background-color: #afe5e9;
   overflow: clip;
-}
-
-.grass {
-  width: 100%;
-  height: 5vh;
-  background: #79d920;
-  position: absolute;
-  bottom: 0;
 }
 
 #tree {
   --height: 98vh;
   height: var(--height);
-  width: calc(1626 / 1714 * var(--height));
+  width: calc(300 / 420 * var(--height));
   position: absolute;
   bottom: 1vh;
   margin: auto;

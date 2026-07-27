@@ -20,7 +20,7 @@ const props = defineProps({
         required: true
     },
     initialColor: {
-        default: '#f54b40'
+        default: '#e6432e'
     }
 })
 

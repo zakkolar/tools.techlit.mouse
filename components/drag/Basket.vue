@@ -93,7 +93,7 @@ function resetApples() {
 }
 
 .dragOver {
-    box-shadow: 0 calc(0.4 * var(--height)) calc(0.5 * 0.5 * var(--height)) calc(0.5 * 0.25 * var(--height)) rgba(0, 255, 255, 0.8);
+    box-shadow: 0 calc(0.4 * var(--height)) calc(0.5 * 0.5 * var(--height)) calc(0.5 * 0.25 * var(--height)) rgba(93, 146, 47, 0.8);
 }
 
 .garden-plot {
@@ -114,7 +114,7 @@ function resetApples() {
         position: absolute;
         top: calc(12/200 * var(--height) * 2);
         z-index: 1;
-        left: calc(-5/200 * var(--height) * 2);
+        left: calc(-2/200 * var(--height) * 2);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -123,17 +123,17 @@ function resetApples() {
     .horizontal-planky {
         height: calc(27/200 * var(--height) * 2);
         width: calc(210/200 * var(--height) * 2);
-        background:#a9633d;
+        background: #6e2717;
         margin-bottom: calc(3/200 * var(--height) * 2);
-        //border-bottom: solid 1px rgba(0, 0, 0, 0.93);
-        box-shadow: 0 calc(4/200 * var(--height) * 2) calc(2/200 * var(--height) * 2) calc(-2/200 * var(--height) * 2) rgba(95, 55, 33, 0.96);
+        border-radius: calc(2/200 * var(--height) * 2);
+        box-shadow: 0 calc(4/200 * var(--height) * 2) 0 calc(-2/200 * var(--height) * 2) #4c1a0f;
     }
 
     .vertical-planky {
         height: var(--height);
         width: calc(20/200 * var(--height) * 2);
-        background:#a9633d;
-        box-shadow: 0 calc(4/200 * var(--height) * 2) calc(2/200 * var(--height) * 2) calc(-2/200 * var(--height) * 2) rgba(95, 55, 33, 0.96);
+        background: color-mix(in srgb, #6e2717 80%, black);
+        box-shadow: 0 calc(4/200 * var(--height) * 2) 0 calc(-2/200 * var(--height) * 2) #6d3223;
 
         border-top-left-radius: calc(4/200 * var(--height) * 2);
         border-top-right-radius: calc(4/200 * var(--height) * 2);
@@ -141,13 +141,14 @@ function resetApples() {
     }
 
        .plant-name {
-        color: #582806;
+        color: rgba(255,255,255,0.4);
+        font-family: theme('fontFamily.display');
         font-size: calc(20/200 * var(--height) * 2);
-        font-weight: bold;
+        font-weight: 700;
         text-transform: uppercase;
         text-align: center;
         position: absolute;
-        top: calc(27/200 * var(--height) * 2);
+        top: calc(30/200 * var(--height) * 2);
            user-select: none;
     }
 </style>
