@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 600 300"
+   version="1.1"
+   id="scroll-thumbnail"
+   sodipodi:docname="scroll-thumbnail.svg"
+   inkscape:export-filename="scroll-thumbnail.png"
+   inkscape:export-xdpi="320"
+   inkscape:export-ydpi="320"
+   inkscape:version="1.2.2 (b0a8486, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview26840"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="1.402507"
+     inkscape:cx="367.5561"
+     inkscape:cy="69.51837"
+     inkscape:window-width="2189"
+     inkscape:window-height="1427"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="scroll-thumbnail" />
+  <defs
+     id="defs26757">
+    <linearGradient
+       id="space-bg"
+       x1="0"
+       y1="0"
+       x2="0"
+       y2="1">
+      <stop
+         offset="0%"
+         stop-color="#130E44"
+         id="stop26740" />
+      <stop
+         offset="25%"
+         stop-color="#00427e"
+         id="stop26742" />
+      <stop
+         offset="50%"
+         stop-color="#0078b3"
+         id="stop26744" />
+      <stop
+         offset="75%"
+         stop-color="#00b2de"
+         id="stop26746" />
+      <stop
+         offset="100%"
+         stop-color="#52DAFF"
+         id="stop26748" />
+    </linearGradient>
+    <clipPath
+       id="thumb-planet-orange-clip">
+      <circle
+         cx="60"
+         cy="60"
+         r="50"
+         id="circle26751" />
+    </clipPath>
+    <clipPath
+       id="thumb-planet-blue-clip">
+      <circle
+         cx="60"
+         cy="60"
+         r="50"
+         id="circle26754" />
+    </clipPath>
+  </defs>
+  <rect
+     width="600"
+     height="300"
+     fill="url(#space-bg)"
+     id="background" />
+  <g
+     transform="translate(-108,122) scale(2.8)"
+     id="g26775">
+    <circle
+       cx="60"
+       cy="60"
+       r="50"
+       fill="#ff762c"
+       id="planet-orange-body" />
+    <g
+       clip-path="url(#thumb-planet-orange-clip)"
+       id="g26773">
+      <circle
+         cx="80"
+         cy="40"
+         r="50"
+         fill="#000000"
+         opacity="0.12"
+         id="circle26761" />
+      <circle
+         cx="57"
+         cy="57"
+         r="7"
+         fill="#000000"
+         opacity="0.3"
+         id="circle26763" />
+      <circle
+         cx="38"
+         cy="38"
+         r="4"
+         fill="#000000"
+         opacity="0.3"
+         id="circle26765" />
+      <circle
+         cx="98"
+         cy="74"
+         r="8"
+         fill="#000000"
+         opacity="0.3"
+         id="circle26767" />
+      <circle
+         cx="38"
+         cy="72"
+         r="6"
+         fill="#000000"
+         opacity="0.3"
+         id="circle26769" />
+      <circle
+         cx="92"
+         cy="24"
+         r="10"
+         fill="#000000"
+         opacity="0.3"
+         id="circle26771" />
+    </g>
+  </g>
+  <g
+     transform="translate(476,-64) scale(1.4)"
+     id="g26792">
+    <circle
+       cx="60"
+       cy="60"
+       r="50"
+       fill="#3360e0"
+       id="planet-blue-body" />
+    <g
+       clip-path="url(#thumb-planet-blue-clip)"
+       id="g26790">
+      <circle
+         cx="80"
+         cy="40"
+         r="50"
+         fill="#000000"
+         opacity="0.12"
+         id="circle26778" />
+      <circle
+         cx="57"
+         cy="57"
+         r="7"
+         fill="#000000"
+         opacity="0.3"
+         id="circle26780" />
+      <circle
+         cx="38"
+         cy="38"
+         r="4"
+         fill="#000000"
+         opacity="0.3"
+         id="circle26782" />
+      <circle
+         cx="98"
+         cy="74"
+         r="8"
+         fill="#000000"
+         opacity="0.3"
+         id="circle26784" />
+      <circle
+         cx="38"
+         cy="72"
+         r="6"
+         fill="#000000"
+         opacity="0.3"
+         id="circle26786" />
+      <circle
+         cx="92"
+         cy="24"
+         r="10"
+         fill="#000000"
+         opacity="0.3"
+         id="circle26788" />
+    </g>
+  </g>
+  <g
+     fill="#ffffff"
+     id="g26806">
+    <polygon
+       points="97.5,5 128.6,70 195,97.5 130,128.6 102.5,195 71.4,130 5,102.5 70,71.4"
+       transform="translate(508,118) scale(0.12) translate(-100,-100)"
+       id="polygon26794" />
+    <polygon
+       points="97.5,5 128.6,70 195,97.5 130,128.6 102.5,195 71.4,130 5,102.5 70,71.4"
+       transform="translate(452,58) scale(0.09) translate(-100,-100)"
+       id="polygon26796" />
+    <polygon
+       points="97.5,5 128.6,70 195,97.5 130,128.6 102.5,195 71.4,130 5,102.5 70,71.4"
+       transform="translate(226,222) scale(0.1) translate(-100,-100)"
+       id="polygon26798" />
+    <polygon
+       points="97.5,5 128.6,70 195,97.5 130,128.6 102.5,195 71.4,130 5,102.5 70,71.4"
+       transform="translate(538,238) scale(0.08) translate(-100,-100)"
+       id="polygon26800" />
+    <polygon
+       points="97.5,5 128.6,70 195,97.5 130,128.6 102.5,195 71.4,130 5,102.5 70,71.4"
+       transform="translate(576,152) scale(0.07) translate(-100,-100)"
+       id="polygon26802" />
+    <polygon
+       points="97.5,5 128.6,70 195,97.5 130,128.6 102.5,195 71.4,130 5,102.5 70,71.4"
+       transform="translate(330,178) scale(0.1) translate(-100,-100)"
+       id="polygon26804" />
+  </g>
+  <g
+     transform="translate(380,190) rotate(-12) scale(0.53125) translate(-100,-160)"
+     id="g26833">
+    <g
+       id="g9433"
+       transform="translate(-5.8760905,-58.206013)">
+      <path
+         style="fill:#f6ad14"
+         d="m 100,288.82227 a 19,19 0 0 0 -19,19 19,19 0 0 0 3.994141,11.57617 L 100,351.80078 115.00586,319.39844 A 19,19 0 0 0 119,307.82227 a 19,19 0 0 0 -19,-19 z"
+         id="path26808" />
+      <path
+         style="fill:#f2e718"
+         d="m 100,291.42188 a 13,13 0 0 0 -13,13 13,13 0 0 0 3.015625,8.29882 L 100,334.59961 109.98438,312.7207 A 13,13 0 0 0 113,304.42188 a 13,13 0 0 0 -13,-13 z"
+         id="path26810" />
+    </g>
+    <path
+       style="fill:#dd4d2d;fill-opacity:1"
+       d="m 64.166878,172.23617 c -16.800535,0 -30.326172,13.52563 -30.326172,30.32617 v 24.59375 c 0,12.57985 7.584015,23.32167 18.447265,27.92578 -0.08182,-0.91189 -0.130859,-1.83368 -0.130859,-2.76757 v -24.59375 c 0,-16.80054 13.525636,-30.32618 30.326172,-30.32618 4.22069,0 8.234154,0.85371 11.878905,2.39844 -1.390876,-15.49213 -14.329183,-27.55664 -30.195311,-27.55664 z"
+       id="path26813" />
+    <path
+       style="fill:#dd4d2d;fill-opacity:1"
+       d="m 124.08094,172.23617 c 16.80054,0 30.32617,13.52563 30.32617,30.32617 v 24.59375 c 0,12.57985 -7.58401,23.32167 -18.44726,27.92578 0.0818,-0.91189 0.13086,-1.83368 0.13086,-2.76757 v -24.59375 c 0,-16.80054 -13.52564,-30.32618 -30.32618,-30.32618 -4.22069,0 -8.23415,0.85371 -11.878901,2.39844 1.390876,-15.49213 14.329181,-27.55664 30.195311,-27.55664 z"
+       id="path26815" />
+    <path
+       fill="#ffffff"
+       d="M 67.996454,221.01909 C 56.848413,197.19791 53.310692,123.0158 59.060492,91.04848 64.810279,59.08123 78.691698,38.134089 94.124079,38.134089 c 15.432371,0 29.313791,20.947141 35.063581,52.914391 5.7498,31.96732 2.21208,106.14943 -8.93596,129.97061 z"
+       id="path26817" />
+    <path
+       fill="#dd4d2d"
+       d="m 61.015864,81.78112 a 37.78398,84.341991 0 0 1 66.216426,0 q -33.108211,15.24253 -66.216426,0 z"
+       id="path26819" />
+    <circle
+       cx="94.123909"
+       cy="120.23037"
+       r="16.156939"
+       fill="#076aa1"
+       stroke="#dd4d2d"
+       stroke-width="3.72853"
+       id="circle26821" />
+    <path
+       fill="#ffffff"
+       opacity="0.5"
+       d="M 106.50261,113.08118 A 14.292676,14.292676 0 0 1 84.933097,131.17695 Z"
+       id="path26823" />
+    <path
+       fill="#000000"
+       opacity="0.13"
+       d="m 94.124079,38.134089 c 15.431921,-4.54e-4 29.313751,20.946845 35.063531,52.914491 5.74978,31.96765 2.23605,106.16259 -8.91212,129.98361 H 107.18334 C 120.61838,198.79511 136.68132,95.83683 94.124079,38.134089 Z"
+       id="path26825" />
+    <polygon
+       fill="#076aa1"
+       points="90,259.93 110,259.93 111.3,263.93 88.7,263.93"
+       transform="matrix(1.74006,0,0,1.4851481,-79.88209,-165.01877)"
+       id="polygon26827" />
+    <path
+       fill="#dd4d2d"
+       d="m 92.496219,174.86972 h 3.25538 v 59.54184 c 0,13.23152 -1.328968,19.76795 -1.62769,19.84728 -0.296201,0.0787 -1.62769,-6.61576 -1.62769,-19.84728 z"
+       id="path26829" />
+    <polygon
+       fill="#dd4d2d"
+       points="88.7,263.93 111.3,263.93 114,271.93 86,271.93"
+       transform="matrix(1.74006,0,0,1.4851481,-79.88209,-165.01877)"
+       id="polygon26831" />
+  </g>
+  <rect
+     x="40"
+     y="40"
+     width="88"
+     height="10"
+     rx="5"
+     fill="#52DAFF"
+     id="accent-bar" />
+  <text
+     x="42"
+     y="100"
+     font-family="'Baloo 2'"
+     font-weight="800"
+     font-size="54"
+     fill="#0a1330"
+     opacity="0.35"
+     id="title-shadow">Scavenger Hunt</text>
+  <text
+     x="40"
+     y="98"
+     font-family="'Baloo 2'"
+     font-weight="800"
+     font-size="54"
+     fill="#ffffff"
+     id="title">Scavenger Hunt</text>
+  <text
+     x="40"
+     y="136"
+     font-family="Nunito"
+     font-weight="700"
+     font-size="20.7"
+     fill="#ffffff"
+     opacity="0.85"
+     id="subtitle">SCROLL PRACTICE</text>
+</svg>

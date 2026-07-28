@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 600 300"
+   version="1.1"
+   id="svg55"
+   sodipodi:docname="select-thumbnail.svg"
+   inkscape:version="1.2.2 (b0a8486, 2022-12-01)"
+   inkscape:export-filename="select-thumbnail.png"
+   inkscape:export-xdpi="320"
+   inkscape:export-ydpi="320"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview57"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="2.2250293"
+     inkscape:cx="321.11936"
+     inkscape:cy="87.86401"
+     inkscape:window-width="2189"
+     inkscape:window-height="1427"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg55" />
+  <defs
+     id="defs7">
+    <pattern
+       id="select-dots"
+       width="20"
+       height="20"
+       patternUnits="userSpaceOnUse">
+      <circle
+         cx="4"
+         cy="4"
+         r="1"
+         fill="#8b5cf6"
+         opacity="0.45"
+         id="circle2" />
+      <circle
+         cx="14"
+         cy="14"
+         r="1"
+         fill="#8b5cf6"
+         opacity="0.45"
+         id="circle4" />
+    </pattern>
+  </defs>
+  <rect
+     width="600"
+     height="300"
+     fill="#f3e8ff"
+     id="rect9" />
+  <rect
+     width="600"
+     height="300"
+     fill="url(#select-dots)"
+     id="rect11" />
+  <rect
+     x="42"
+     y="40"
+     width="88"
+     height="10"
+     rx="5"
+     fill="#8b5cf6"
+     id="rect13" />
+  <text
+     x="40"
+     y="98"
+     font-family="'Baloo 2'"
+     font-weight="800"
+     font-size="54"
+     fill="#1e293b"
+     id="text15">Word</text>
+  <rect
+     x="180.65274"
+     y="50.639"
+     width="256"
+     height="60"
+     rx="16"
+     fill="#8b5cf6"
+     id="rect17" />
+  <text
+     x="196"
+     y="98"
+     font-family="'Baloo 2'"
+     font-weight="800"
+     font-size="54"
+     fill="#ffffff"
+     id="text19">Collector</text>
+  <text
+     x="40"
+     y="136"
+     font-family="Nunito"
+     font-weight="700"
+     font-size="20.702px"
+     fill="#1e293b"
+     opacity="0.75"
+     id="text-subtitle">SELECT PRACTICE</text>
+  <!-- phrase card -->
+  <rect
+     x="61.734528"
+     y="155.14389"
+     width="480"
+     height="79.78746"
+     rx="24"
+     fill="#ffffff"
+     opacity="0.95"
+     id="rect21"
+     style="stroke-width:0.902307" />
+  <rect
+     x="60"
+     y="150"
+     width="480"
+     height="98"
+     rx="24"
+     fill="none"
+     stroke="#00000010"
+     stroke-width="1"
+     id="rect23" />
+  <g
+     fill="#cbd5e1"
+     id="g35"
+     transform="translate(0.73452759,-0.96237946)">
+    <rect
+       x="96"
+       y="187"
+       width="64"
+       height="18"
+       rx="9"
+       id="rect25" />
+    <rect
+       x="170"
+       y="187"
+       width="44"
+       height="18"
+       rx="9"
+       id="rect27" />
+    <rect
+       x="224"
+       y="187"
+       width="96"
+       height="18"
+       rx="9"
+       id="rect29" />
+    <rect
+       x="330"
+       y="187"
+       width="54"
+       height="18"
+       rx="9"
+       id="rect31" />
+    <rect
+       x="394"
+       y="187"
+       width="112"
+       height="18"
+       rx="9"
+       id="rect33" />
+  </g>
+  <rect
+     x="220.03624"
+     y="182.68488"
+     width="129.63255"
+     height="24.7055"
+     rx="1.9943469"
+     fill="#8b5cf6"
+     opacity="0.92"
+     id="rect37"
+     style="fill:#8b5cf6;fill-opacity:0.436044;stroke-width:1.10986" />
+  <g
+     stroke="#1e293b"
+     stroke-width="2.5"
+     stroke-linecap="round"
+     id="g53"
+     transform="translate(-31.937074,1.0376205)">
+    <line
+       x1="382"
+       y1="180"
+       x2="382"
+       y2="208"
+       id="line47" />
+    <line
+       x1="377"
+       y1="180"
+       x2="387"
+       y2="180"
+       id="line49" />
+    <line
+       x1="377"
+       y1="208"
+       x2="387"
+       y2="208"
+       id="line51" />
+  </g>
+</svg>
