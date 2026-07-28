@@ -1,4 +1,8 @@
 <script setup>
+useHead({
+  title: 'Mouse Practice Games'
+})
+
 const games = ref([
   {
     title: "Coin Chase",
@@ -7,8 +11,10 @@ const games = ref([
     page: "/click",
     customize: "https://customize.techlit.tools/#url=https://mouse.techlit.tools/customize/click.json",
     documentation: "https://docs.techlit.tools/mouse-games/click/",
-    thumbnail: "/images/click/coin.png",
-    thumbnailAlt: "Illustration of a gold coin on a blue background"
+    thumbnailPng: "/images/home/click-thumbnail.png",
+    thumbnailWebp: "/images/home/click-thumbnail.webp",
+    thumbnailAlt: "A glowing gold coin being clicked, against a dark starlit background",
+    accent: "#FFC800"
   }, {
     title: "Apple Picker",
     subtitle: "Drag practice",
@@ -16,8 +22,10 @@ const games = ref([
     page: "/drag",
     customize: "https://customize.techlit.tools/#url=https://mouse.techlit.tools/customize/drag.json",
     documentation: "https://docs.techlit.tools/mouse-games/drag/",
-    thumbnail: "/images/drag/apple.png",
-    thumbnailAlt: "Illustration of a red apple on a green background"
+    thumbnailPng: "/images/home/drag-thumbnail.png",
+    thumbnailWebp: "/images/home/drag-thumbnail.webp",
+    thumbnailAlt: "A red apple being dragged from a tree to a wooden crate",
+    accent: "#5d922f"
   }, {
     title: "Scavenger Hunt",
     subtitle: "Scroll practice",
@@ -25,8 +33,10 @@ const games = ref([
     page: "/scroll",
     customize: "https://customize.techlit.tools/#url=https://mouse.techlit.tools/customize/scroll.json",
     documentation: "https://docs.techlit.tools/mouse-games/scroll/",
-    thumbnail: "/images/scroll/bird.png",
-    thumbnailAlt: "Illustration of a pink cartoon bird against a blue sky."
+    thumbnailPng: "/images/home/scroll-thumbnail.png",
+    thumbnailWebp: "/images/home/scroll-thumbnail.webp",
+    thumbnailAlt: "A cartoon rocket flying past planets and stars in a night sky",
+    accent: "#28c2d1"
   }, {
     title: "Word Collector",
     subtitle: "Select practice",
@@ -34,39 +44,81 @@ const games = ref([
     page: "/select",
     customize: "https://customize.techlit.tools/#url=https://mouse.techlit.tools/customize/select.json",
     documentation: "https://docs.techlit.tools/mouse-games/select/",
-    thumbnail: "/images/select/cursor.svg",
-    thumbnailAlt: "Illustration of text with a word highlighted in purple."
+    thumbnailPng: "/images/home/select-thumbnail.png",
+    thumbnailWebp: "/images/home/select-thumbnail.webp",
+    thumbnailAlt: "A line of text with one word highlighted in purple, with a text cursor",
+    accent: "#8b5cf6"
   }
 ])
 </script>
 <template>
-  <div class="prose text-center mx-auto p-4">
-    <h1>Mouse practice games</h1>
-    <p>A collection of games to practice mouse/trackpad skills.</p>
-    <p><a href="https://techlit.tools/about">About</a> | <a href="https://docs.techlit.tools/mouse-games/privacy/">Privacy</a>
-    </p>
-  </div>
-  <div class="grid gap-4 grid-cols-1 md:grid-cols-2 max-w-prose m-auto">
-    <div v-for="game of games" class="p-4">
-      <div class="w-40 h-40 mx-auto">
-        <router-link :to="game.page"><img :src="game.thumbnail" class="object-contain" :alt="game.thumbnailAlt">
+  <div id="home-bg" class="min-h-screen">
+    <header class="mx-auto max-w-3xl px-4 pt-16 pb-10 text-center sm:pt-20">
+      <div class="accent-dashes mx-auto mb-5 flex w-fit gap-1.5">
+        <span v-for="game of games" :key="game.title" class="h-1.5 w-8 rounded-full" :style="{ background: game.accent }"></span>
+      </div>
+      <h1 class="font-display text-4xl font-extrabold text-slate-800 sm:text-5xl">Mouse Practice Games</h1>
+      <p class="mx-auto mt-4 max-w-xl text-lg text-slate-500">A playful set of games for practicing mouse and trackpad skills.</p>
+      <nav class="mt-5 flex justify-center gap-4 text-slate-500">
+        <a href="https://techlit.tools/about" class="hover:text-slate-700 hover:underline">About</a>
+        <a href="https://docs.techlit.tools/mouse-games/privacy/" class="hover:text-slate-700 hover:underline">Privacy</a>
+      </nav>
+    </header>
+
+    <main class="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 pb-20 lg:grid-cols-2">
+      <article v-for="game of games" :key="game.title" class="game-card group flex flex-col overflow-hidden rounded-[2rem] bg-white shadow-lg transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl" :style="{ '--accent': game.accent }">
+        <router-link :to="game.page" class="block overflow-hidden">
+          <h2 class="sr-only">{{ game.title }} &mdash; {{ game.subtitle }}</h2>
+          <picture>
+            <source :srcset="game.thumbnailWebp" type="image/webp">
+            <img :src="game.thumbnailPng" :alt="game.thumbnailAlt" class="block aspect-[2/1] w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" width="1200" height="600" loading="lazy">
+          </picture>
         </router-link>
-      </div>
-
-      <h2 class="mb-2 text-2xl mt-6 text-center">{{ game.title }}</h2>
-      <p class="text-center italic mb-0">{{ game.subtitle }}</p>
-      <p class="mt-2 text-center">{{ game.description }}</p>
-      <div class="text-center">
-        <router-link :to="game.page" class="action">Play</router-link>
-        <a class="action" :href="game.documentation">Documentation</a>
-        <a class="action" :href="game.customize">Customize settings</a>
-      </div>
-
-    </div>
+        <div class="flex flex-1 flex-col gap-4 p-6 sm:p-7">
+          <p class="flex-1 text-slate-600">{{ game.description }}</p>
+          <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <router-link :to="game.page" class="play-button rounded-full px-6 py-2.5 font-display font-bold text-slate-800 shadow-sm transition-transform duration-150 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0">Play</router-link>
+            <a class="link-action" :href="game.documentation">Documentation</a>
+            <a class="link-action" :href="game.customize">Customize settings</a>
+          </div>
+        </div>
+      </article>
+    </main>
   </div>
 </template>
 <style scoped>
-.action {
-  @apply hover:underline text-blue-500 rounded border-0 md:inline-block block md:mr-4 mt-2;
+#home-bg {
+  background-color: #f8fafc;
+  background-image: radial-gradient(circle, #e2e8f0 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+}
+
+.play-button {
+  background: var(--accent);
+}
+
+.play-button:hover {
+  background: color-mix(in srgb, var(--accent) 88%, black);
+}
+
+.play-button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 60%, black);
+  outline-offset: 3px;
+}
+
+.link-action {
+  @apply text-slate-500 hover:underline;
+}
+
+.link-action:hover {
+  color: color-mix(in srgb, var(--accent) 70%, black);
+}
+
+.game-card {
+  outline: 1px solid transparent;
+}
+
+.game-card:hover {
+  outline-color: color-mix(in srgb, var(--accent) 35%, transparent);
 }
 </style>
