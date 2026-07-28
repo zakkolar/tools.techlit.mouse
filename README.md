@@ -2,6 +2,8 @@
 
 This is a collection of games to help players use a mouse/trackpad. Each game can be customized via URL parameters. You can [try the demo](https://mouse.techlit.tools) or [read the docs](https://docs.techlit.tools/mouse-games)
 
+**Generative AI disclosure**: I coded all the functionality myself and used Claude to help refine the visual design
+
 ## Development
 
 This site is built with [Nuxt](https://nuxt.com/) and available under the MIT License. You are free to use/modify it as you see fit as long as you follow the license requirements.
