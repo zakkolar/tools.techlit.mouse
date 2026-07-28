@@ -247,7 +247,7 @@ body {
 .game {
   width: 100%;
   height: 100vh;
-  background-image: url('/images/forest-bg.svg');
+  background-image: url('/images/drag/forest-bg.svg');
   background-size: cover;
   background-position: bottom center;
   background-color: #afe5e9;
@@ -262,7 +262,7 @@ body {
   bottom: 1vh;
   margin: auto;
   left: 5vh;
-  background-image: url('/images/tree.svg');
+  background-image: url('/images/drag/tree.svg');
 }
 
 </style>

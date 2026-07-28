@@ -7,7 +7,7 @@ const games = ref([
     page: "/click",
     customize: "https://customize.techlit.tools/#url=https://mouse.techlit.tools/customize/click.json",
     documentation: "https://docs.techlit.tools/mouse-games/click/",
-    thumbnail: "/images/coin.png",
+    thumbnail: "/images/click/coin.png",
     thumbnailAlt: "Illustration of a gold coin on a blue background"
   }, {
     title: "Apple Picker",
@@ -16,7 +16,7 @@ const games = ref([
     page: "/drag",
     customize: "https://customize.techlit.tools/#url=https://mouse.techlit.tools/customize/drag.json",
     documentation: "https://docs.techlit.tools/mouse-games/drag/",
-    thumbnail: "/images/apple.png",
+    thumbnail: "/images/drag/apple.png",
     thumbnailAlt: "Illustration of a red apple on a green background"
   }, {
     title: "Scavenger Hunt",
@@ -25,7 +25,7 @@ const games = ref([
     page: "/scroll",
     customize: "https://customize.techlit.tools/#url=https://mouse.techlit.tools/customize/scroll.json",
     documentation: "https://docs.techlit.tools/mouse-games/scroll/",
-    thumbnail: "/images/bird.png",
+    thumbnail: "/images/scroll/bird.png",
     thumbnailAlt: "Illustration of a pink cartoon bird against a blue sky."
   }, {
     title: "Word Selector",
@@ -34,7 +34,7 @@ const games = ref([
     page: "/select",
     customize: "https://customize.techlit.tools/#url=https://mouse.techlit.tools/customize/select.json",
     documentation: "https://docs.techlit.tools/mouse-games/select/",
-    thumbnail: "/images/cursor.svg",
+    thumbnail: "/images/select/cursor.svg",
     thumbnailAlt: "Illustration of text with a word highlighted in purple."
   }
 ])
