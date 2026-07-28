@@ -324,8 +324,8 @@ function playSound(s: string) {
     </div>
   </div>
 
-  <GameHud :minutes="minutes" :seconds="seconds" label="Found" :count="foundItems" accent="#28c2d1" />
-  <div id="notch">
+  <GameHud :minutes="minutes" :seconds="seconds" label="Found" :count="foundItems" accent="#52DAFF" />
+  <div id="notch" v-if="gameState === GAME_STATES.PLAYING">
     <p class="inline-block my-auto font-display font-medium">
       <span v-if="currentItem">Can you find this?</span>
       <span v-else>Can you find...</span>
