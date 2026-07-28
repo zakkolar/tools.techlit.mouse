@@ -363,13 +363,13 @@ body {
 
   overflow-x: clip;
 
-  --space: rgba(19, 14, 68, 1);
+  --space: #130E44;
 
-  --sky: rgba(69, 238, 255, 1);
+  --sky: #45EEFF;
 }
 
 #space {
-  background: linear-gradient(0deg, var(--sky) 0%, rgba(35, 86, 128, 1) 25%, rgba(21, 22, 75, 1) 50%, var(--space) 60%, var(--space) 100%);
+   background-image: linear-gradient(to bottom, var(--space), #00427e, #0078b3, #00b2de, var(--sky));
   height: 110vh;
 }
 
