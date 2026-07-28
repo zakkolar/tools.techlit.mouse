@@ -365,18 +365,17 @@ body {
 
   --space: #130E44;
 
-  --sky: #45EEFF;
+  --sky: #52DAFF;
 }
 
 #space {
-   background-image: linear-gradient(to bottom, var(--space), #00427e, #0078b3, #00b2de, var(--sky));
-  height: 110vh;
+ background-image: linear-gradient(to bottom, var(--space), #00427e, #0078b3, #00b2de, var(--sky));  height: 110vh;
 }
 
 
 #sky {
   @apply section;
-  background-color: var(--sky);
+    background-image: linear-gradient(to bottom, var(--sky), #56e0ff, #5be6ff, #62ebff, #6af1ff);
   height: 90vh;
 
 }
