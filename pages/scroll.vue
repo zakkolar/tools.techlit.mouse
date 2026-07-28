@@ -366,6 +366,8 @@ body {
   --space: #130E44;
 
   --sky: #52DAFF;
+
+  --sky-bottom: #6af1ff;
 }
 
 #space {
@@ -375,14 +377,18 @@ body {
 
 #sky {
   @apply section;
-    background-image: linear-gradient(to bottom, var(--sky), #56e0ff, #5be6ff, #62ebff, #6af1ff);
+    background-image: linear-gradient(to bottom, var(--sky), #56e0ff, #5be6ff, #62ebff, var(--sky-bottom));
   height: 90vh;
 
 }
 
 #ground {
   @apply section;
-  background-color: #9ee86b;
+  background-color: var(--sky-bottom);
+  background-image: url('/images/scroll/grass-hills.svg');
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  background-size: 100% 100%;
   height: 25vh;
 }
 
