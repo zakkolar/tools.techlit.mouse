@@ -5,7 +5,7 @@ import Coin from "~/components/click/Coin.vue";
 import {getMinutes, getSeconds} from "~/utilities/MinutesAndSeconds";
 
 useHead({
-  title: 'Coin Collector',
+  title: 'Coin Chase',
   link: [
     {
       rel: 'icon',
@@ -158,7 +158,7 @@ function updateTimer() {
   <GameHud v-if="gameState !== GAME_STATES.GAME_OVER" :minutes="minutes" :seconds="seconds" label="Coins"
            :count="collectedCoins" accent="#FFC800" counter-id="coinCount" />
 
-  <StartScreen @start="startGame" v-if="gameState === GAME_STATES.READY" title="Coin Collector" accent="#FFC800">
+  <StartScreen @start="startGame" v-if="gameState === GAME_STATES.READY" title="Coin Chase" accent="#FFC800">
     Click on as many coins as you can before the time runs out.
   </StartScreen>
 

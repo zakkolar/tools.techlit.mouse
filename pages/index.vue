@@ -1,7 +1,7 @@
 <script setup>
 const games = ref([
   {
-    title: "Coin Collector",
+    title: "Coin Chase",
     subtitle: "Click practice",
     description: "Click as many coins as you can before the time runs out.",
     page: "/click",
