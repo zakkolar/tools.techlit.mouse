@@ -117,12 +117,41 @@ const currentSelection = ref("");
 const transitioning = ref(false);
 const collectedPhrases = ref(0);
 const isSelecting = ref(false);
+const phraseCard = ref<HTMLElement | null>(null);
+const phraseVisible = ref(true);
 
-const nextPhrase = () => {
-  currentPhraseIndex.value++;
-  if (currentPhraseIndex.value === phrases.length) {
-    currentPhraseIndex.value = 0;
+const nextPhrase = async () => {
+  const card = phraseCard.value;
+  if (!card) {
+    currentPhraseIndex.value = (currentPhraseIndex.value + 1) % phrases.length;
+    return;
   }
+
+  const before = { width: card.offsetWidth, height: card.offsetHeight };
+
+  phraseVisible.value = false;
+  await new Promise(resolve => setTimeout(resolve, 180));
+
+  currentPhraseIndex.value = (currentPhraseIndex.value + 1) % phrases.length;
+  await nextTick();
+
+  const after = { width: card.offsetWidth, height: card.offsetHeight };
+
+  card.style.transition = 'none';
+  card.style.width = `${before.width}px`;
+  card.style.height = `${before.height}px`;
+  card.offsetHeight; // force reflow so the size above takes effect before animating
+  card.style.transition = 'width 0.35s cubic-bezier(0.4, 0, 0.2, 1), height 0.35s cubic-bezier(0.4, 0, 0.2, 1)';
+  card.style.width = `${after.width}px`;
+  card.style.height = `${after.height}px`;
+
+  phraseVisible.value = true;
+
+  card.addEventListener('transitionend', () => {
+    card.style.transition = '';
+    card.style.width = '';
+    card.style.height = '';
+  }, { once: true });
 }
 
 const currentTarget = computed(() => {
@@ -280,6 +309,7 @@ function checkSelection(event: Event) {
     if (target) {
 
       const rect = target.getBoundingClientRect();
+      const isSingleLine = target.getClientRects().length <= 1;
 
       target.classList.add('correct');
 
@@ -287,8 +317,12 @@ function checkSelection(event: Event) {
       clone.classList.add('clone');
       clone.style.top = `${rect.top}px`;
       clone.style.left = `${rect.left}px`;
-      clone.style.width = `${rect.width}px`;
-      clone.style.height = `${rect.height}px`;
+      if (isSingleLine) {
+        clone.classList.add('clone-nowrap');
+      } else {
+        clone.style.width = `${rect.width}px`;
+        clone.style.height = `${rect.height}px`;
+      }
 
       const inner = document.createElement('span');
       inner.textContent = target.textContent;
@@ -361,24 +395,30 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="text-gray-900 bg-purple-100 h-screen w-screen">
-    <div v-if="gameState !== GAME_STATES.GAME_OVER">
-      <div class="absolute left-2 top-2 text-5xl select-none">{{ minutes }}:{{ seconds }}</div>
-    </div>
-    <div id="phraseCount" class="select-none absolute right-2 top-2 text-5xl">Score: {{ collectedPhrases }}</div>
+  <div id="select-bg" class="text-gray-900 bg-purple-100 h-screen w-screen">
+    <GameHud v-if="gameState !== GAME_STATES.GAME_OVER" :minutes="minutes" :seconds="seconds" label="Score"
+             :count="collectedPhrases" accent="#8b5cf6" counter-id="phraseCount" />
 
-    <StartScreen v-if="gameState === GAME_STATES.READY" title="Select" @start="startGame">
+    <StartScreen v-if="gameState === GAME_STATES.READY" title="Select" @start="startGame" accent="#8b5cf6">
       Click and drag over the <span class="target">bold</span> words to select them. Select as many as you can before the timer runs out!
     </StartScreen>
 
-    <div v-if="gameState === GAME_STATES.PLAYING" class="text-center justify-center h-screen items-center flex flex-col w-full max-w-4xl mx-auto">
-      <div class="relative">
-        <div id="phrase" class="text-6xl selection:bg-purple-500 selection:text-white" v-html="currentMarkup"></div>
-        <div v-if="hint" class="absolute select-none text-3xl w-full text-center mt-10 top-full">{{ hint }}</div>
+    <div v-if="gameState === GAME_STATES.PLAYING" class="text-center justify-center h-screen items-center flex flex-col w-full px-6">
+      <div class="relative w-full max-w-4xl">
+        <div class="absolute inset-x-16 top-0 h-2 -translate-y-1/2 rounded-full" style="background: #8b5cf6;"></div>
+        <div ref="phraseCard" class="bg-white rounded-[2rem] shadow-2xl px-12 py-16 overflow-hidden">
+          <div id="phrase" class="text-6xl leading-tight font-display font-medium selection:bg-purple-500 select-text selection:text-white transition-opacity duration-150"
+               :class="phraseVisible ? 'opacity-100' : 'opacity-0'" v-html="currentMarkup"></div>
+        </div>
+        <div class="absolute select-none w-full text-center mt-6 top-full">
+          <Transition name="hint-fade" mode="out-in">
+            <span v-if="hint" :key="hint" class="inline-block bg-black/70 text-white text-xl font-medium rounded-xl px-7 py-3 shadow-lg">{{ hint }}</span>
+          </Transition>
+        </div>
       </div>
     </div>
 
-    <EndScreen v-if="gameState === GAME_STATES.GAME_OVER" title="Time's up!" :button="showPlayAgain" @play-again="playAgain">
+    <EndScreen v-if="gameState === GAME_STATES.GAME_OVER" title="Time's up!" :button="showPlayAgain" @play-again="playAgain" accent="#8b5cf6">
       You selected {{ collectedPhrases }} phrase{{ collectedPhrases === 1 ? '' : 's' }}!
     </EndScreen>
   </div>
@@ -386,8 +426,29 @@ onBeforeUnmount(() => {
 
 <style>
 
+#select-bg {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
+
+#select-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.8;
+  background-image:
+    radial-gradient(circle, #8b5cf6 0.8px, transparent 0.8px),
+    radial-gradient(circle, #8b5cf6 0.8px, transparent 0.8px);
+  background-size: 5px 20px, 20px 5px;
+  background-position: -2.5px -10px, -10px -2.5px;
+  pointer-events: none;
+  z-index: -1;
+}
+
 #target, .target {
-  @apply font-bold underline underline-offset-8 decoration-gray-600 decoration-dotted decoration-2
+  @apply font-bold underline underline-offset-8 decoration-dotted decoration-2;
+  text-decoration-color: #8b5cf6;
 }
 
 #target.correct {
@@ -398,7 +459,12 @@ onBeforeUnmount(() => {
   position: fixed;
   pointer-events: none;
   z-index: 9999;
-  @apply text-6xl text-center;
+  font-family: theme('fontFamily.display');
+  @apply text-6xl leading-tight text-center font-medium;
+}
+
+.clone-nowrap {
+  white-space: nowrap;
 }
 
 .clone-inner {
@@ -407,5 +473,16 @@ onBeforeUnmount(() => {
   font-weight: bold;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
+}
+
+.hint-fade-enter-active,
+.hint-fade-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.hint-fade-enter-from,
+.hint-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-6px) scale(0.96);
 }
 </style>
