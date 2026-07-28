@@ -5,7 +5,7 @@ import StartScreen from '~/components/StartScreen.vue';
 import EndScreen from '~/components/EndScreen.vue';
 
 useHead({
-  title: 'Word Selector',
+  title: 'Word Collector',
   link: [
     {
       rel: 'icon',

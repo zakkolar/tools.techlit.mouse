@@ -28,7 +28,7 @@ const games = ref([
     thumbnail: "/images/scroll/bird.png",
     thumbnailAlt: "Illustration of a pink cartoon bird against a blue sky."
   }, {
-    title: "Word Selector",
+    title: "Word Collector",
     subtitle: "Selecting practice",
     description: "Select as many words as you can before the time runs out.",
     page: "/select",
