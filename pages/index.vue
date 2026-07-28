@@ -2,7 +2,7 @@
 const games = ref([
   {
     title: "Coin Collector",
-    subtitle: "Clicking practice",
+    subtitle: "Click practice",
     description: "Click as many coins as you can before the time runs out.",
     page: "/click",
     customize: "https://customize.techlit.tools/#url=https://mouse.techlit.tools/customize/click.json",
@@ -11,7 +11,7 @@ const games = ref([
     thumbnailAlt: "Illustration of a gold coin on a blue background"
   }, {
     title: "Apple Picker",
-    subtitle: "Dragging practice",
+    subtitle: "Drag practice",
     description: "Drag as many apples to the basket as you can before the time runs out.",
     page: "/drag",
     customize: "https://customize.techlit.tools/#url=https://mouse.techlit.tools/customize/drag.json",
@@ -20,7 +20,7 @@ const games = ref([
     thumbnailAlt: "Illustration of a red apple on a green background"
   }, {
     title: "Scavenger Hunt",
-    subtitle: "Scrolling practice",
+    subtitle: "Scroll practice",
     description: "Scroll up and down to find the required items before time runs out.",
     page: "/scroll",
     customize: "https://customize.techlit.tools/#url=https://mouse.techlit.tools/customize/scroll.json",
@@ -29,7 +29,7 @@ const games = ref([
     thumbnailAlt: "Illustration of a pink cartoon bird against a blue sky."
   }, {
     title: "Word Collector",
-    subtitle: "Selecting practice",
+    subtitle: "Select practice",
     description: "Select as many words as you can before the time runs out.",
     page: "/select",
     customize: "https://customize.techlit.tools/#url=https://mouse.techlit.tools/customize/select.json",
