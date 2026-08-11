@@ -38,3 +38,7 @@ export const hashToParams = function() {
       })
     return params;
 }
+
+export const hasHashParams = function() {
+    return window.location.hash.substring(1).length > 0;
+}

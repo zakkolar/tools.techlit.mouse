@@ -6,7 +6,7 @@ import Star from "~/components/scroll/Star.vue";
 import Cloud from "~/components/scroll/Cloud.vue";
 import Sun from "~/components/scroll/Sun.vue";
 import Bird from "~/components/scroll/Bird.vue";
-import {getParam, hashToParams, PARAM_TYPES} from "~/utilities/UrlParams";
+import {getParam, hashToParams, hasHashParams, PARAM_TYPES} from "~/utilities/UrlParams";
 import {getMinutes, getSeconds} from "~/utilities/MinutesAndSeconds";
 import PlanetOrange from "~/components/scroll/PlanetOrange.vue";
 import PlanetBlue from "~/components/scroll/PlanetBlue.vue";
@@ -14,8 +14,12 @@ import Rocket from "~/components/scroll/Rocket.vue";
 import Bone from "~/components/scroll/Bone.vue";
 import Worm from "~/components/scroll/Worm.vue";
 import Treasure from "~/components/scroll/Treasure.vue";
+import Instructions from "~/components/instructions/Instructions.vue";
+import {games} from "~/data/games";
 
-enum GAME_STATES {LOADING, READY, PLAYING, GAME_OVER}
+const gameMeta = games.find(g => g.slug === 'scroll');
+
+enum GAME_STATES {LOADING, INSTRUCTIONS, READY, PLAYING, GAME_OVER}
 
 const defaults = {
   timeLimit: 60,
@@ -42,7 +46,7 @@ const gameState = ref(GAME_STATES.LOADING),
     foundItems = ref(0);
 
 useHead({
-  title: 'Scavenger Hunt',
+  title: gameMeta.title,
   link: [
     {
       rel: 'icon',
@@ -131,7 +135,7 @@ function updateGameSettingsFromHash() {
   if (getParam(params, 'devMode', PARAM_TYPES.BOOLEAN, false)) {
     gameState.value = GAME_STATES.PLAYING;
   } else {
-    gameState.value = GAME_STATES.READY;
+    gameState.value = hasHashParams() ? GAME_STATES.READY : GAME_STATES.INSTRUCTIONS;
   }
 }
 
@@ -324,7 +328,10 @@ function playSound(s: string) {
     </div>
   </div>
 
-  <GameHud :minutes="minutes" :seconds="seconds" label="Found" :count="foundItems" accent="#52DAFF" />
+  <GameHud v-if="gameState !== GAME_STATES.INSTRUCTIONS" :minutes="minutes" :seconds="seconds" label="Found" :count="foundItems" accent="#52DAFF" />
+
+  <Instructions v-if="gameState === GAME_STATES.INSTRUCTIONS" :game="gameMeta" second-param-example="disableArrowKeys=true" />
+
   <div id="notch" v-if="gameState === GAME_STATES.PLAYING">
     <p class="inline-block my-auto font-display font-medium">
       <span v-if="currentItem">Can you find this?</span>
@@ -335,16 +342,16 @@ function playSound(s: string) {
                  :height="`${currentItem.previewHeight || 5}vh`"></component>
     </div>
   </div>
-  <div v-if="[GAME_STATES.READY, GAME_STATES.GAME_OVER].includes(gameState)"
+  <div v-if="[GAME_STATES.READY, GAME_STATES.GAME_OVER, GAME_STATES.INSTRUCTIONS].includes(gameState)"
        class="absolute top-0 left-0 right-0 bottom-0 bg-[#00000040]">
 
   </div>
-  <StartScreen title="Scavenger Hunt" @start="startGame" v-if="gameState === GAME_STATES.READY" accent="#28c2d1">
-    Scroll up and down to find each item.
+  <StartScreen :title="gameMeta.title" @start="startGame" v-if="gameState === GAME_STATES.READY" :accent="gameMeta.accent" :accent-text-color="gameMeta.accentTextColor">
+    {{ gameMeta.description }}
   </StartScreen>
 
 
-  <EndScreen v-if="gameState === GAME_STATES.GAME_OVER" @play-again="startGame" :button="showPlayAgain" accent="#28c2d1">
+  <EndScreen v-if="gameState === GAME_STATES.GAME_OVER" @play-again="startGame" :button="showPlayAgain" :accent="gameMeta.accent" :accent-text-color="gameMeta.accentTextColor">
     You found {{ foundItems }} item<span v-if="foundItems !== 1">s</span>!
   </EndScreen>
 </template>

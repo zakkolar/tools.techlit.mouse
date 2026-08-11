@@ -9,6 +9,10 @@ defineProps({
     accent: {
         type: String,
         default: '#a3e635'
+    },
+    accentTextColor: {
+        type: String,
+        default: 'white'
     }
 })
 
@@ -32,7 +36,8 @@ function buttonPress() {
       </div>
       <button
           v-if="button"
-          class="button-screen-cta mt-6 block w-full rounded-2xl p-4 font-display text-3xl font-bold text-slate-800 shadow-md transition-transform duration-150 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:shadow-md"
+          class="button-screen-cta mt-6 block w-full rounded-2xl p-4 font-display text-3xl font-bold shadow-md transition-transform duration-150 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:shadow-md"
+          :class="accentTextColor === 'black' ? 'text-slate-800' : 'text-white'"
           @click="buttonPress"
       >{{ buttonText }}</button>
     </div>

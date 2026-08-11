@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import { hashToParams, getParam, PARAM_TYPES } from '~/utilities/UrlParams';
+import { hashToParams, getParam, hasHashParams, PARAM_TYPES } from '~/utilities/UrlParams';
 import { getMinutes, getSeconds } from '~/utilities/MinutesAndSeconds';
 import StartScreen from '~/components/StartScreen.vue';
 import EndScreen from '~/components/EndScreen.vue';
+import Instructions from '~/components/instructions/Instructions.vue';
+import { games } from '~/data/games';
+
+const gameMeta = games.find(g => g.slug === 'select');
 
 useHead({
-  title: 'Word Collector',
+  title: gameMeta.title,
   link: [
     {
       rel: 'icon',
@@ -15,7 +19,7 @@ useHead({
   ]
 })
 
-enum GAME_STATES { LOADING, READY, PLAYING, GAME_OVER }
+enum GAME_STATES { LOADING, INSTRUCTIONS, READY, PLAYING, GAME_OVER }
 
 interface Phrase {
   phrase: string;
@@ -207,7 +211,7 @@ function updateGameSettingsFromHash() {
   timeLimit.value = getParam(params, 'timeLimit', PARAM_TYPES.INTEGER, defaults.timeLimit);
   showPlayAgain.value = getParam(params, 'showPlayAgain', PARAM_TYPES.BOOLEAN, defaults.showPlayAgain);
   resetGame();
-  gameState.value = GAME_STATES.READY;
+  gameState.value = hasHashParams() ? GAME_STATES.READY : GAME_STATES.INSTRUCTIONS;
 }
 
 function charLabel(c: string): string {
@@ -396,16 +400,18 @@ onBeforeUnmount(() => {
 
 <template>
   <div id="select-bg" class="text-gray-900 bg-purple-100 h-screen w-screen">
-    <GameHud v-if="gameState !== GAME_STATES.GAME_OVER" :minutes="minutes" :seconds="seconds" label="Score"
-             :count="collectedPhrases" accent="#8b5cf6" counter-id="phraseCount" />
+    <GameHud v-if="![GAME_STATES.GAME_OVER, GAME_STATES.INSTRUCTIONS].includes(gameState)" :minutes="minutes" :seconds="seconds" label="Score"
+             :count="collectedPhrases" :accent="gameMeta.accent" counter-id="phraseCount" />
 
-    <StartScreen v-if="gameState === GAME_STATES.READY" title="Select" @start="startGame" accent="#8b5cf6">
+    <Instructions v-if="gameState === GAME_STATES.INSTRUCTIONS" :game="gameMeta" second-param-example="showPlayAgain=true" />
+
+    <StartScreen v-if="gameState === GAME_STATES.READY" :title="gameMeta.title" @start="startGame" :accent="gameMeta.accent" :accent-text-color="gameMeta.accentTextColor">
       Click and drag over the <span class="target">bold</span> words to select them. Select as many as you can before the timer runs out!
     </StartScreen>
 
     <div v-if="gameState === GAME_STATES.PLAYING" class="text-center justify-center h-screen items-center flex flex-col w-full px-6">
       <div class="relative w-full max-w-4xl">
-        <div class="absolute inset-x-16 top-0 h-2 -translate-y-1/2 rounded-full" style="background: #8b5cf6;"></div>
+        <div class="absolute inset-x-16 top-0 h-2 -translate-y-1/2 rounded-full" :style="{ background: gameMeta.accent }"></div>
         <div ref="phraseCard" class="bg-white rounded-[2rem] shadow-2xl px-12 py-16 overflow-hidden">
           <div id="phrase" class="text-6xl leading-tight font-display font-medium selection:bg-purple-500 select-text selection:text-white transition-opacity duration-150"
                :class="phraseVisible ? 'opacity-100' : 'opacity-0'" v-html="currentMarkup"></div>
@@ -418,7 +424,7 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <EndScreen v-if="gameState === GAME_STATES.GAME_OVER" title="Time's up!" :button="showPlayAgain" @play-again="playAgain" accent="#8b5cf6">
+    <EndScreen v-if="gameState === GAME_STATES.GAME_OVER" title="Time's up!" :button="showPlayAgain" @play-again="playAgain" :accent="gameMeta.accent" :accent-text-color="gameMeta.accentTextColor">
       You selected {{ collectedPhrases }} phrase{{ collectedPhrases === 1 ? '' : 's' }}!
     </EndScreen>
   </div>

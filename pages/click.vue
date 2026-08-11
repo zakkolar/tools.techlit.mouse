@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
-import {getParam, hashToParams, PARAM_TYPES} from "~/utilities/UrlParams";
+import {getParam, hashToParams, hasHashParams, PARAM_TYPES} from "~/utilities/UrlParams";
 import Coin from "~/components/click/Coin.vue";
 import {getMinutes, getSeconds} from "~/utilities/MinutesAndSeconds";
+import Instructions from "~/components/instructions/Instructions.vue";
+import {games} from "~/data/games";
+
+const gameMeta = games.find(g => g.slug === 'click');
 
 useHead({
-  title: 'Coin Chase',
+  title: gameMeta.title,
   link: [
     {
       rel: 'icon',
@@ -15,7 +19,7 @@ useHead({
   ]
 })
 
-enum GAME_STATES {LOADING, READY, PLAYING, GAME_OVER}
+enum GAME_STATES {LOADING, INSTRUCTIONS, READY, PLAYING, GAME_OVER}
 
 const defaults = {
   coinSize: 100,
@@ -118,7 +122,7 @@ function updateGameSettingsFromHash() {
 
   resetGame();
 
-  gameState.value = GAME_STATES.READY;
+  gameState.value = hasHashParams() ? GAME_STATES.READY : GAME_STATES.INSTRUCTIONS;
 
 }
 
@@ -155,14 +159,16 @@ function updateTimer() {
 
 </script>
 <template>
-  <GameHud v-if="gameState !== GAME_STATES.GAME_OVER" :minutes="minutes" :seconds="seconds" label="Coins"
-           :count="collectedCoins" accent="#FFC800" counter-id="coinCount" />
+  <GameHud v-if="![GAME_STATES.GAME_OVER, GAME_STATES.INSTRUCTIONS].includes(gameState)" :minutes="minutes" :seconds="seconds" label="Coins"
+           :count="collectedCoins" :accent="gameMeta.accent" counter-id="coinCount" />
 
-  <StartScreen @start="startGame" v-if="gameState === GAME_STATES.READY" title="Coin Chase" accent="#FFC800">
-    Click on as many coins as you can before the time runs out.
+  <Instructions v-if="gameState === GAME_STATES.INSTRUCTIONS" :game="gameMeta" second-param-example="showPlayAgain=true" />
+
+  <StartScreen @start="startGame" v-if="gameState === GAME_STATES.READY" :title="gameMeta.title" :accent="gameMeta.accent" :accent-text-color="gameMeta.accentTextColor">
+    {{ gameMeta.description }}
   </StartScreen>
 
-  <EndScreen v-if="gameState === GAME_STATES.GAME_OVER" @play-again="startGame" :button="showPlayAgain" accent="#FFC800">
+  <EndScreen v-if="gameState === GAME_STATES.GAME_OVER" @play-again="startGame" :button="showPlayAgain" :accent="gameMeta.accent" :accent-text-color="gameMeta.accentTextColor">
     You collected {{ collectedCoins }} coin<span v-if="collectedCoins !== 1">s</span>!
   </EndScreen>
 

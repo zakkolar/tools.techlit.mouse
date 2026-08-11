@@ -2,10 +2,14 @@
 import Basket from "~/components/drag/Basket.vue";
 import DraggableApple from "~/components/drag/DraggableApple.vue";
 import {getMinutes, getSeconds} from "~/utilities/MinutesAndSeconds";
-import {getParam, hashToParams, PARAM_TYPES} from "~/utilities/UrlParams";
+import {getParam, hashToParams, hasHashParams, PARAM_TYPES} from "~/utilities/UrlParams";
+import Instructions from "~/components/instructions/Instructions.vue";
+import {games} from "~/data/games";
+
+const gameMeta = games.find(g => g.slug === 'drag');
 
 useHead({
-  title: 'Apple Picker',
+  title: gameMeta.title,
   link: [
     {
       rel: 'icon',
@@ -15,7 +19,7 @@ useHead({
   ]
 })
 
-enum GAME_STATES {LOADING, READY, PLAYING, GAME_OVER}
+enum GAME_STATES {LOADING, INSTRUCTIONS, READY, PLAYING, GAME_OVER}
 
 const defaults = {
   timeLimit: 60,
@@ -153,7 +157,7 @@ function updateGameSettingsFromHash() {
   disableTouchScreen.value = getParam(params, 'disableTouchScreen', PARAM_TYPES.BOOLEAN, defaults.disableTouchScreen);
 
   resetGame();
-  gameState.value = GAME_STATES.READY
+  gameState.value = hasHashParams() ? GAME_STATES.READY : GAME_STATES.INSTRUCTIONS;
 }
 
 function startGame() {
@@ -206,8 +210,10 @@ function handleDragEnd() {
 
 </script>
 <template>
-  <GameHud v-if="gameState !== GAME_STATES.GAME_OVER" :minutes="minutes" :seconds="seconds" label="Apples"
-           :count="collectedApples" accent="#5d922f" counter-id="coinCount" />
+  <GameHud v-if="![GAME_STATES.GAME_OVER, GAME_STATES.INSTRUCTIONS].includes(gameState)" :minutes="minutes" :seconds="seconds" label="Apples"
+           :count="collectedApples" :accent="gameMeta.accent" counter-id="coinCount" />
+
+  <Instructions v-if="gameState === GAME_STATES.INSTRUCTIONS" :game="gameMeta" second-param-example="showPlayAgain=true" />
 
   <div class="game">
     <div id="tree"></div>
@@ -231,11 +237,11 @@ function handleDragEnd() {
     </Basket>
   </div>
 
-  <StartScreen @start="startGame" v-if="gameState === GAME_STATES.READY" title="Apple Picker" accent="#5d922f">
-    Click and drag as many apples to the basket as you can before time runs out.
+  <StartScreen @start="startGame" v-if="gameState === GAME_STATES.READY" :title="gameMeta.title" :accent="gameMeta.accent" :accent-text-color="gameMeta.accentTextColor">
+    {{ gameMeta.description }}
   </StartScreen>
 
-  <EndScreen v-if="gameState === GAME_STATES.GAME_OVER" @play-again="startGame" :button="showPlayAgain" accent="#5d922f">
+  <EndScreen v-if="gameState === GAME_STATES.GAME_OVER" @play-again="startGame" :button="showPlayAgain" :accent="gameMeta.accent" :accent-text-color="gameMeta.accentTextColor">
     You picked {{ collectedApples }} apple<span v-if="collectedApples !== 1">s</span>!
   </EndScreen>
 </template>

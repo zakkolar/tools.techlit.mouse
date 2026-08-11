@@ -11,6 +11,10 @@ defineProps({
     accent: {
         type: String,
         default: '#a3e635'
+    },
+    accentTextColor: {
+        type: String,
+        default: 'white'
     }
 });
 
@@ -22,7 +26,7 @@ function start() {
 
 </script>
 <template>
-    <ButtonScreen :title="title" :button-text="buttonText" :accent="accent" @button-press="start">
+    <ButtonScreen :title="title" :button-text="buttonText" :accent="accent" :accent-text-color="accentTextColor" @button-press="start">
         <slot></slot>
     </ButtonScreen>
 </template>
