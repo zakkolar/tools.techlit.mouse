@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   xmlnsXlink="http://www.w3.org/1999/xlink"
+   width="512"
+   height="512"
+   x="0"
+   y="0"
+   viewBox="0 0 512 512"
+   xmlSpace="preserve"
+   class=""
+   id="svg16"
+   sodipodi:docname="coin.svg"
+   inkscape:version="1.2.2 (b0a8486, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs20" />
+  <sodipodi:namedview
+     id="namedview18"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="1.7771447"
+     inkscape:cx="330.86782"
+     inkscape:cy="191.03677"
+     inkscape:window-width="2189"
+     inkscape:window-height="1427"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g10" />
+  <g
+     id="g14">
+    <circle
+       cx="256"
+       cy="256"
+       r="256"
+       fill="#ffb703"
+       opacity="1"
+       data-original="#ffb703"
+       class=""
+       id="circle2" />
+    <circle
+       cx="256"
+       cy="256"
+       r="183.75"
+       fill="#ffcc29"
+       opacity="1"
+       data-original="#ffcc29"
+       class=""
+       id="circle4" />
+    <g
+       fill="none"
+       stroke-miterlimit="10"
+       id="g10">
+      <circle
+         cx="256"
+         cy="256"
+         r="183.75"
+         stroke="#f99300"
+         stroke-width="32.32"
+         fill=""
+         opacity="1"
+         id="circle6" />
+      <path
+         stroke="#ffcc29"
+         stroke-linecap="round"
+         stroke-width="19.39"
+         d="M341.31 468.54a227.51 227.51 0 0 0 142.15-210.92M142.26 59A226.34 226.34 0 0 1 256 28.54M64.77 132.76a228.18 228.18 0 0 1 39.64-46.37M56.22 364.84A226.58 226.58 0 0 1 28.54 256"
+         fill=""
+         opacity="1"
+         id="path8" />
+    </g>
+    <path
+       fill="#f99300"
+       d="m303.53 237.67-44.85-64.91a3.25 3.25 0 0 0-5.36 0l-44.85 64.91a3.26 3.26 0 0 1-4 1.14l-63.64-28.27a3.27 3.27 0 0 0-4.46 3.89l36.9 126.36a3.26 3.26 0 0 0 3.13 2.35h159.21a3.26 3.26 0 0 0 3.13-2.35l36.9-126.36a3.27 3.27 0 0 0-4.46-3.89l-63.64 28.27a3.29 3.29 0 0 1-4.01-1.14z"
+       opacity="1"
+       data-original="#f99300"
+       class=""
+       id="path12" />
+  </g>
+</svg>

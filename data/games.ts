@@ -14,7 +14,7 @@ export const games: GameMeta[] = [
     title: "Coin Chase",
     subtitle: "Click practice",
     description: "Click as many coins as you can before the time runs out.",
-    accent: "#FFC800",
+    accent: "#FFCC29",
     accentTextColor: "black",
     customizeUrl: "https://customize.techlit.tools/#url=https://mouse.techlit.tools/customize/click.json"
   },

@@ -1,8 +1,8 @@
 <script setup>
 /*
-Spinning coin CSS:
+3D Spinning Coin Using CSS Animation
 
-Copyright (c) 2023 by Michael Lai (https://codepen.io/keiwo/pen/ZONRgx)
+Copyright (c) 2026 by Helkyle (https://codepen.io/HelKyle/pen/vEEOwyg)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -15,129 +15,154 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import {onMounted} from "vue";
 
 const props = defineProps({
-    size: {
-        type: Number,
-        default: 50
-    },
-    xMin: {
-        type:Number,
-        required:true
-    },
-    xMax: {
-        type:Number,
-        required: true
-    },
-    yMin: {
-        type: Number,
-        required: true
-    },
-    yMax: {
-        type: Number,
-        required: true
-    }
+  size: {
+    type: Number,
+    default: 50
+  },
+  xMin: {
+    type: Number,
+    required: true
+  },
+  xMax: {
+    type: Number,
+    required: true
+  },
+  yMin: {
+    type: Number,
+    required: true
+  },
+  yMax: {
+    type: Number,
+    required: true
+  }
 });
-
-const EDGE_SEGMENTS = 24;
-const edgeAngles = Array.from({length: EDGE_SEGMENTS}, (_, i) => i * (360 / EDGE_SEGMENTS));
 
 const x = ref(-1), y = ref(-1);
 
 function moveCoin() {
-    x.value = ((props.xMax - props.xMin - props.size) * Math.random()) + props.xMin;
-    y.value = ((props.yMax - props.yMin - props.size) * Math.random()) + props.yMin;
+  x.value = ((props.xMax - props.xMin - props.size) * Math.random()) + props.xMin;
+  y.value = ((props.yMax - props.yMin - props.size) * Math.random()) + props.yMin;
 }
 
 const emit = defineEmits(['caught']);
 
 function caught() {
-    moveCoin();
-    emit('caught');
+  moveCoin();
+  emit('caught');
 }
 
 onMounted(() => {
-    moveCoin();
+  moveCoin();
 })
 
 watch([() => props.yMin, () => props.yMax, () => props.xMin, () => props.xMax], (values) => {
-    const [yMin, yMax, xMin, xMax] = values;
-    if(y.value < yMin || y.value > yMax - props.size || x.value < xMin || x.value > xMax - props.size) {
-        moveCoin();
-    }
+  const [yMin, yMax, xMin, xMax] = values;
+  if (y.value < yMin || y.value > yMax - props.size || x.value < xMin || x.value > xMax - props.size) {
+    moveCoin();
+  }
 
 
 })
 
 </script>
 <template>
-  <div v-if="x > -1 && y > -1" @click="caught" class="coin" :style="{top:`${y}px`, left: `${x}px`, '--coin-size':`${props.size}px`}">
-    <div class="tails"></div>
-    <div class="heads"></div>
-    <div v-for="(angle, i) in edgeAngles" :key="i" class="edge-segment" :class="{'edge-segment--dark': i % 2 === 0}"
-         :style="{transform: `rotateZ(${angle}deg) translateX(calc(var(--coin-size) / 2)) rotateY(90deg)`}"></div>
+  <div class="coin"  v-if="x > -1 && y > -1" @click="caught" :style="{top:`${y}px`, left: `${x}px`, '--coin-size':`${props.size}px`}">
+    <div class="coin-side">
+      <div class="coin-side-inner"></div>
+    </div>
+    <div class="coin-body">
+      <div class="front">
+        <img src="images/click/coin.svg">
+      </div>
+      <div class="front-background"></div>
+      <div class="back">
+        <img src="images/click/coin.svg">
+      </div>
+      <div class="back-background"></div>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-:root {
-  --coin-size: 50px;
-}
-.coin{
-	--coin-face: #ffd54a;
-	--coin-edge: #c97f00;
-	--coin-thickness: calc(var(--coin-size) * 0.14);
-	width: var(--coin-size);
-	height: var(--coin-size);
-	position: absolute;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-	animation: spin 2.46s linear infinite;
+
+.coin {
+  --coin-size: 128px;
+  --coin-thickness: calc(var(--coin-size) / 16);
+  --animation-duration: 2s;
+  --coin-side-color: #F99300;
+  position: absolute;
   cursor: pointer;
-
-	@keyframes spin{
-		0%{
-			transform: rotateY(0deg);
-		}
-		100%{
-			transform: rotateY(360deg);
-		}
-	}
 }
 
-.tails,
-.heads{
-	background: radial-gradient(circle at 35% 30%, #fff6d8 0%, var(--coin-face) 45%, var(--coin-edge) 100%);
-	position: absolute;
-	border-radius: 50%;
-	content: '';
-	height: var(--coin-size);
-	width: var(--coin-size);
-	border: 1px solid var(--coin-edge);
-	box-shadow:
-		0 6px 10px rgba(0, 0, 0, 0.35),
-		0 0 calc(var(--coin-size) * 0.3) rgba(255, 200, 0, 0.55),
-		inset 0 0 0 calc(var(--coin-size) * 0.07) rgba(0, 0, 0, 0.12);
+@keyframes spin {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
 }
 
-.tails{
-	transform: translateZ(calc(var(--coin-thickness) / 2));
+svg {
+  width: var(--coin-size);
+  height: var(--coin-size);
 }
 
-.heads{
-	transform: translateZ(calc(var(--coin-thickness) / -2));
+.coin-body {
+  will-change: transform;
+  height: var(--coin-size);
+  width: var(--coin-size);
+  transform-style: preserve-3d;
+  position: relative;
+  animation: spin var(--animation-duration) linear infinite;
 }
 
-.edge-segment{
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: var(--coin-thickness);
-	height: calc(var(--coin-size) * 0.145);
-	margin-left: calc(var(--coin-thickness) / -2);
-	margin-top: calc(var(--coin-size) * -0.0725);
-	background: var(--coin-edge);
+.front {
+  height: var(--coin-size);
+  width: var(--coin-size);
+  position: absolute;
+  transform: rotateY(0deg) translateZ(calc(var(--coin-thickness) * -1));
 }
 
-.edge-segment--dark{
-	background: color-mix(in srgb, var(--coin-edge) 78%, black);
+.back {
+  height: var(--coin-size);
+  width: var(--coin-size);
+  position: absolute;
+  transform: rotateY(180deg) translateZ(calc(var(--coin-thickness) * -1));
+}
+
+.front-background {
+  height: var(--coin-size);
+  width: var(--coin-size);
+  background: var(--coin-side-color);
+  position: absolute;
+  transform: rotateY(0deg) translateZ(calc(var(--coin-thickness) * -1));
+  border-radius: 50%;
+  backface-visibility: hidden;
+}
+
+.back-background {
+  height: var(--coin-size);
+  width: var(--coin-size);
+  background: var(--coin-side-color);
+  position: absolute;
+  transform: rotateY(180deg) translateZ(calc(var(--coin-thickness) * -1));
+  border-radius: 50%;
+  backface-visibility: hidden;
+}
+
+.coin-side {
+  height: var(--coin-size);
+  width: var(--coin-size);
+  position: absolute;
+  transform-style: preserve-3d;
+  animation: spin var(--animation-duration) linear infinite;
+}
+
+.coin-side-inner {
+  height: var(--coin-size);
+  width: calc(var(--coin-thickness) * 2);
+  transform: translateX(calc(var(--coin-size) * 0.5 - var(--coin-thickness))) rotateY(90deg);
+  background: var(--coin-side-color);
 }
 </style>
