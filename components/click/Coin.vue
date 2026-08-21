@@ -72,11 +72,11 @@ watch([() => props.yMin, () => props.yMax, () => props.xMin, () => props.xMax], 
     </div>
     <div class="coin-body">
       <div class="front">
-        <img src="images/click/coin.svg">
+        <img src="/images/click/coin.svg">
       </div>
       <div class="front-background"></div>
       <div class="back">
-        <img src="images/click/coin.svg">
+        <img src="/images/click/coin.svg">
       </div>
       <div class="back-background"></div>
     </div>
